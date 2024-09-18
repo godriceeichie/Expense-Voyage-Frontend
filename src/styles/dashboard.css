@@ -1,0 +1,142 @@
+
+
+.price{
+    font-size: 26px;
+}
+.searchIcon{
+    display: none;
+}
+.sellerImgBox{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+.sellerImg{
+    position: absolute;
+    bottom: 0%;
+    right: 4%;
+    margin-bottom: -30px;
+    width: 130px;
+}
+
+.allCon{
+    box-shadow: 6px 7px 10px 2px rgba(35, 35, 47, 0.598);
+    border-radius: 12px;
+    padding: 24px;
+    background-color: #ffff;
+}
+.allConTitle{
+    color: #5b5865;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.test-color{
+    color: #2e4b4f54;
+}
+.allConSubText{
+    color: #8D8DA3;
+    font-weight: 600;
+    font-size: 13px;
+}
+.bluetext{
+    color: #24b364;
+    /* background: #24b364; */
+}
+.statCon{
+    height: 100%;
+    gap: 100px;
+}
+.popularP{
+    border-radius: 50%;
+    display: flex;
+    width: 35px;
+    height: 35px;
+    justify-content: center;
+    transition: ease-in-out 0.5s;
+    align-items: center;
+}
+.popularP:hover{
+    background: #373c55;
+}
+
+.statistics{
+    color: white;
+    font-weight: 600;
+}
+.menuList{
+    background: #272b45;
+    border: none;
+}
+
+.menuItem{
+    transition: ease-in-out 0.5s;
+}
+.menuItem:hover{
+    background: #373c5553;
+}
+
+.actionBtn{
+     width: 30px;
+     height: 30px;
+     border-radius: 50%;
+     /* background-color: red;
+     color: white; */
+     font-size: 20px;
+     display: flex;
+     justify-content: center;
+     transition: ease-in-out 0.5s;
+     align-items: center;
+}
+.actionBtn:hover{
+    background: #4e536c8b;
+}
+
+.selectSize{
+    background-color: transparent;
+    width: 100%;
+}
+.mantine-Select-wrapper{
+    width: 100%;
+}
+.mantine-Select-input{
+    background: #272b45;
+    border: 2px solid #7367f0;
+    color: #C2C0D7;
+    font-size: 16px;
+    width: 100%;
+    font-weight: 600;
+}
+.mantine-Select-dropdown{
+    background: #272b45;
+    color: #C2C0D7;
+    font-weight: 600;
+    font-size: 18px;
+    border: 2px solid #7367f0;
+}
+
+.mantine-Select-option{
+    font-size: 15px;
+}
+.mantine-Select-option:hover{
+    background-color: #4635ff;
+}
+
+.mantine-Input-input{
+    background: #272b45;
+    border: 2px solid #373c55;
+    color: #C2C0D7;
+    font-size: 15px;
+}
+.mantine-Input-input::placeholder{
+    color: #616789;
+    font-weight: 500;
+    font-size: 13px;
+}
+
+.productDetails{
+    border-right: 2px solid #3e4258;
+}
+

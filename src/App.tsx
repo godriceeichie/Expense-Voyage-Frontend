@@ -1,6 +1,8 @@
 import './App.css'
 import { createBrowserRouter,  RouterProvider } from 'react-router-dom'
 import { Login, Signup } from './pages'
+import DashHome from './pages/dashboard/DashHome'
+import { UserDashLayout } from './layout/index'
 
 function App() {
   const router = createBrowserRouter(
@@ -10,6 +12,14 @@ function App() {
       children: [
         {path:"login", element: <Login />},
         {path:"signup", element: <Signup />}
+      ]
+    },
+    {
+      path: '/dashboard/home', element: <UserDashLayout/>,
+      children: [
+        {
+          index: true, element: <DashHome/>
+        }
       ]
     }
    ]
