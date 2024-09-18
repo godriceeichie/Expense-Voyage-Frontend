@@ -1,0 +1,81 @@
+.nav{
+    background-color: white;
+    width: 100vw;
+    height: 5%;
+    padding: 15px 0px;
+    display: flex;
+    justify-content: space-around;
+}
+.nav ol{
+    list-style-type: none;
+    display: flex;
+    gap: 20%;
+    justify-content: space-evenly;
+    color: black;
+    font-size: 20px;
+}
+.landing-page-container{
+    display: flex;
+    justify-content: space-around;
+    background-color: white;
+    margin: 150px 10%;
+    width: 80%;
+}
+.landing-page-container .landing-left{
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.landing-page-container .landing-left .h1{
+    font-size: 50px;
+}
+.landing-page-container .landing-left .h1 strong{
+    color: #004010;
+    font-weight: 600;
+}
+.landing-page-container .landing-left .text2{
+    font-size:22px ;
+    text-overflow: ellipsis;
+}
+.landing-page-container .landing-left button{
+    background-color: #004010;
+    width: 150px;
+    height: 40px;
+    color: white;
+    border-radius: 20px;
+    font-weight: 600;
+}
+.landing-page-container .landing-right{
+    width: 40%;
+    height: fit-content;
+    border-radius: 20px;
+}
+.landing-page-container .landing-right img{
+    height: 440px;
+    width: 440px;
+    border-radius: 20px;
+}
+/* Floating airplane icon */
+.floating-icon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    font-size: 50px;
+    color: #007bff;
+    animation: float 3s ease-in-out infinite;
+    z-index: 1000;
+  }
+  
+  /* Animation to make the airplane "float" */
+  @keyframes float {
+    0% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-15px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }
