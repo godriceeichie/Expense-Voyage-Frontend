@@ -6,6 +6,7 @@ export default {
       colors: {
         "primary-color": "#004010",
         "text-color-900": "#001606",
+        "error-color": "#FF3838",
       },
     },
   },

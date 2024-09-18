@@ -19,3 +19,7 @@ password: z
     .trim()
     .min(6, { message: "Password should not be less than 6 characters" }),
 });
+
+export const emailValidation = z.object({
+    email: z.string().email({ message: "Invalid email address" }),
+  });

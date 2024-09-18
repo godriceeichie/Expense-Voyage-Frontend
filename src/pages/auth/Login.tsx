@@ -97,28 +97,42 @@ const Login = () => {
             <input
               type="email"
               id="email"
-              className="border border-[#cfd4d0] outline-none rounded-lg py-2 px-4 placeholder:text-[15px]"
+              className="border border-[#cfd4d0] outline-none rounded-lg py-2 px-3 placeholder:text-[15px]"
               {...register("email")}
               placeholder="Enter your email"
             />
             {errors.email && (
-              <p className="text-sm text-red-500">{errors.email.message}</p>
+              <p className="text-sm text-error-color flex gap-1 items-center">
+                <MdError /> {errors.email.message}
+              </p>
             )}
           </div>
-          <div className="flex flex-col gap-1">
-            <label htmlFor="password" className="font-medium">
-              Password
-            </label>
-            <input
-              type="password"
-              id="password"
-              className="border border-[#cfd4d0] outline-none rounded-lg py-2 px-4 placeholder:text-[15px]"
-              placeholder="Enter your password"
-              {...register("password")}
-            />
-            {errors.password && (
-              <p className="text-sm text-red-500">{errors.password.message}</p>
-            )}
+          <div>
+            <div className="flex flex-col gap-1">
+              <label htmlFor="password" className="font-medium">
+                Password
+              </label>
+              <input
+                type="password"
+                id="password"
+                className="border border-[#cfd4d0] outline-none rounded-lg py-2 px-3 placeholder:text-[15px]"
+                placeholder="Enter your password"
+                {...register("password")}
+              />
+              {errors.password && (
+                <p className="text-sm text-error-color flex gap-1 items-center">
+                  <MdError /> {errors.password.message}
+                </p>
+              )}
+            </div>
+            <div className="flex justify-end mt-1">
+              <Link
+                to={"/auth/forgot-password"}
+                className="text-sm underline transition-all w-full text-right hover:font-medium"
+              >
+                Forgot Password?
+              </Link>
+            </div>
           </div>
           <button
             type="submit"

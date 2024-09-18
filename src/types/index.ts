@@ -23,3 +23,7 @@ export type SignupFieldType = {
     password: string;
 
 }
+
+export type EmailType = {
+    email: string
+}

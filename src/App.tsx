@@ -1,6 +1,6 @@
 import './App.css'
 import { createBrowserRouter,  RouterProvider } from 'react-router-dom'
-import { Login, Signup } from './pages'
+import { ForgotPassword, Login, Signup } from './pages'
 import { Toaster } from 'react-hot-toast'
 
 function App() {
@@ -10,7 +10,8 @@ function App() {
       path: '/auth/',
       children: [
         {path:"login", element: <Login />},
-        {path:"signup", element: <Signup />}
+        {path:"signup", element: <Signup />},
+        {path: "forgot-password", element: <ForgotPassword />}
       ]
     }
    ]

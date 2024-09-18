@@ -7,6 +7,7 @@ import { api } from "../../api";
 import { Loader } from "@mantine/core";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
+import { MdError } from "react-icons/md";
 
 const Signup = () => {
   const [loading, setLoading] = useState(false);
@@ -91,7 +92,9 @@ const Signup = () => {
               placeholder="Enter your name"
             />
             {errors.name && (
-              <p className="text-sm text-red-500">{errors.name.message}</p>
+              <p className="text-sm text-error-color flex gap-1 items-center">
+                <MdError /> {errors.name.message}
+              </p>
             )}
           </div>
           <div className="flex flex-col gap-1">
@@ -121,7 +124,9 @@ const Signup = () => {
               {...register("password")}
             />
             {errors.password && (
-              <p className="text-sm text-red-500">{errors.password.message}</p>
+              <p className="text-sm text-error-color flex gap-1 items-center">
+                <MdError /> {errors.password.message}
+              </p>
             )}
           </div>
           <button
