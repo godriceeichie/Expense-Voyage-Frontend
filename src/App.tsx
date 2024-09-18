@@ -1,12 +1,18 @@
 import './App.css'
-import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom'
-import { Root } from './layout'
+import { createBrowserRouter,  RouterProvider } from 'react-router-dom'
+import { Login, Signup } from './pages'
 
 function App() {
   const router = createBrowserRouter(
-    createRoutesFromElements(
-      <Route path='/'  element={<Root />}/>
-    )
+   [
+    {
+      path: '/auth/',
+      children: [
+        {path:"login", element: <Login />},
+        {path:"signup", element: <Signup />}
+      ]
+    }
+   ]
   )
 
   return (
