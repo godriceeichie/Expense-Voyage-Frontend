@@ -1,0 +1,265 @@
+
+.sidebar::-webkit-scrollbar {
+    width: 2px;  
+  }
+  /* .sidebar::-webkit-scrollbar-track {
+         background: #f1f1f1;   
+  } */
+
+  .sidebar::-webkit-scrollbar-thumb {
+    background: #dcdcdc;  
+    border-radius: 10px;  
+  }
+.sidebar::-webkit-scrollbar-thumb:hover {
+    background: #848484; 
+  }
+
+.accordCtrl{
+    color: white;
+    border: none;
+    border-bottom: none;
+    font-size: 14px;
+    font-weight: 300;
+}
+.accordCtrl:hover{
+    background: #42465d6e;
+}
+.menuItem{
+    color: #A9A8BF;
+    font-weight: 600;
+}
+.menuItem:hover{
+    background: #42465d6e;
+}
+.profilename{
+    font-size: 15px;
+}
+.profileRole{
+    font-size: 12px;
+    color: #a9a8bf9a;
+}
+.divider{
+    outline: 2px solid #A9A8BF;
+}
+.openSidebarBtn{
+    color: white;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+}
+
+.menuBtn{
+    font-weight: 600;
+    display: flex;
+    gap: 70px;
+    font-size: 15px;
+    align-items: center;
+    justify-content: center;
+}
+
+.dashContent{
+    padding: 19px 70px;
+    width: 80%;
+}
+.dashContent .dashInner{
+    width: 85%;
+}
+.dashInner .flexContainer{
+    gap: 20px;
+}
+.bestSeller{
+    width: 37%;
+}
+.largeCon{
+    width: 62%;
+}
+.drawer{
+    background-color: #2e3349;
+}
+.mantine-Drawer-content, .mantine-Drawer-header{
+    background-color: #2e3349;
+}
+.mantine-Drawer-close{
+    color: white;
+}
+.drawerSideBar{
+    width: 100%;
+}
+@media (max-width: 1500px) {
+    .dashInner .flexContainer{
+        flex-direction: column;
+        gap: 20px;
+    }
+    .flexContainer .bestSeller, .flexContainer .largeCon{
+        width: 100%;
+    }
+    /* .statCon{
+        height: 200px;
+    } */
+    .radiusChart{
+        justify-content: center;
+        align-items: center;
+        width: fit-content;
+        display: flex;
+        /* background: #000; */
+        margin: 0 auto;
+    }
+    .generatedLeads{
+        display: none;
+    }
+    .barChart{
+        height: 400px;
+        background: #000;
+    }
+}
+
+
+@media (max-width: 1300px) {
+    .sideBar{
+        display: none;
+    }
+    .dashContent{
+        width: 100%;
+    }
+    .openSidebarBtn{
+        display: flex;
+    }
+}
+
+@media (max-width: 1150px) {
+    .dashContent .dashInner{
+        width: 100%;
+    }
+    .orderTable{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+@media (max-width: 1050px) {
+    .dashContent{
+        padding: 19px 20px;
+    }
+}
+
+@media (max-width: 730px) {
+    body{
+        overflow-x: hidden;
+    }
+    .dashContent{
+        overflow-x: hidden;
+        overflow-y: hidden;
+    }
+    
+}
+
+@media (max-width: 730px) {
+   .statisticsNo{
+    display: grid;
+    grid-template-columns: repeat(2, minMax(140px, 350px));
+    gap: 20px;
+    justify-content: center;
+   }
+   .statisticsNo .statBox{
+    width: 200px;
+   }
+   
+}
+@media (max-width: 560px) {
+    .chartGrp{
+        flex-direction: column;
+    }
+    .profitChart{
+        width: 100%;
+    }
+    .barChart{
+        overflow-x: scroll;
+    }
+}
+
+@media (max-width: 780px) {
+    .orderHead{
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+    }
+    
+ }
+
+ @media (max-width: 720px) {
+    .searchBar{
+        display: none;
+    }
+    .searchIcon{
+        display: block;
+    }
+    .tableordering{
+        width: 100%;
+        /* background: #000; */
+        overflow-x: scroll;
+    }
+    .tableordering table{
+        max-width: fit-content;
+        width: 20%;
+        z-index: -300;
+        /* background-color: red; */
+    }
+ }
+
+ .expenseChartCon{
+    width: 100%;
+    height: 100%;
+ }
+
+ .expenseChart{
+    width: 100px;
+    height: 100%;
+ }
+ @media (max-width: 600px) {
+    .barChart{
+        overflow-x: scroll;
+        width: 100%;
+        
+    }
+    .expenseChartCon{
+        width: 600px;
+    }
+    .barChart .expenseChart{
+        width: 100px;
+    }
+ }
+.popularProducts img{
+    width: 50px;
+}
+
+
+ @media (max-width: 380px) {
+    
+    .sellerInfo{
+        gap: 3px;
+    }
+    .sellerImg{
+        width: 90px;
+        bottom: -19%;
+    }
+   .statisticsNo{
+    grid-template-columns: repeat(auto-fit, minMax(120px, 1fr));
+   }
+   .popularProducts{
+    width: 100%;
+   }
+   .popularProducts img{
+    width: 30px;
+}
+.popularProducts p:first-child{
+    font-size: 16px;
+}
+.popularProducts p:nth-child(2){
+    font-size: 12px;
+}
+   .popularPrice{
+    display: none;
+   }
+
+ }

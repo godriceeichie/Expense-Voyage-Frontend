@@ -1,13 +1,15 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Loader } from "@mantine/core";
 import { loginVal } from "../../schema";
 import useAuth from "../../hooks/useAuth";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { api } from "../../api";
 import { MdError } from "react-icons/md";
+import { Logo } from "../../components";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
@@ -65,15 +67,24 @@ const Login = () => {
       });
   };
 
+  useEffect(() => {
+    let fromParam = queryParams.get("from");
+
+    if (fromParam == "forgot-password") {
+      toast.success("Your password has been successfully reset");
+    }
+  }, []);
+
   return (
     <div className="flex items-center justify-center h-screen px-4">
       <div className="w-full max-w-[400px] mx-auto rounded-lg ring-1 ring-slate-900/5 shadow py-6 px-5 sm:w-4/5 md:w-3/5 lg:w-2/5 flex flex-col items-center">
         {/* <img src={nnpcLogo} alt="" className="w-14" /> */}
+        <Logo />
         <header className="mt-2 mb-4">
           <h1 className="text-center text-text-color-900 font-semibold text-xl">
             Welcome Back
           </h1>
-          <p className="text-sm text-[#8a8e8b] ">
+          <p className="text-sm text-[#8a8e8b]">
             Enter your credentials to continue
           </p>
         </header>
