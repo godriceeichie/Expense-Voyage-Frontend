@@ -1,7 +1,8 @@
 import './App.css'
 import { createBrowserRouter,  RouterProvider } from 'react-router-dom'
 import { Login, Signup } from './pages'
-import DashHome from './pages/dashboard/DashHome'
+// import DashHome from './pages/dashboard/DashHome'
+import {DashHome, AddTrip} from './pages/dashboard'
 import { UserDashLayout } from './layout/index'
 import { Toaster } from 'react-hot-toast'
 
@@ -20,7 +21,8 @@ function App() {
       children: [
         {
           index: true, element: <DashHome/>
-        }
+        },
+        {path: 'add-trip', element: <AddTrip/>}
       ]
     }
    ]

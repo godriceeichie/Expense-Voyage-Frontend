@@ -19,3 +19,5 @@ password: z
     .trim()
     .min(6, { message: "Password should not be less than 6 characters" }),
 });
+
+

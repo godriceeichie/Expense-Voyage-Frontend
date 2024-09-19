@@ -3,7 +3,7 @@ import { RiPieChart2Line } from "react-icons/ri";
 import { FaDollarSign } from "react-icons/fa";
 import '../../styles/dashboard.css'
 import '../../styles/dashHome.css'
-import {Itinerary, UpcomingTrips, } from '../../components/index'
+import {Itinerary, PopularTrips, UpcomingTrips, } from '../../components/index'
 
 
 const DashHome = () => {
@@ -121,6 +121,7 @@ const DashHome = () => {
        <Box w={'100%'} className="flex flexContainer gap-5">
        <Box  className="allCon bestSeller flex">
             {/* <PopularProduct/> */}
+            <PopularTrips/>
         </Box>
         <Box className="allCon largeCon orderTable flex">
             {/* <OrderTable/> */}

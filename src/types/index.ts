@@ -23,3 +23,10 @@ export type SignupFieldType = {
     password: string;
 
 }
+
+export type BookFlightType ={
+    location: string
+    destination: string
+    date: string
+    max: number
+}
