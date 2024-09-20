@@ -29,6 +29,7 @@ const AuthMiddleware = ({children}: {children: ReactNode}) => {
               setUser(res.data);
             }
             isMounted && setLoading(false);
+            console.log(user)
           })
           .catch(() => {
             setLoading(false);
@@ -47,15 +48,16 @@ const AuthMiddleware = ({children}: {children: ReactNode}) => {
       isMounted = false;
     };
   }, []);
+//   console.log(user)
   return (
     <>
       {loading ? (
         <LoadingOverlay
           visible={true}
-        //   overlayProps={{ blur: 2 }}
           loaderProps={{ type: "bars", color: "green" }}
         />
-      ) : user && (
+      ) : (
+        user &&
         children
       )}
     </>

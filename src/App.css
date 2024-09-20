@@ -7,3 +7,9 @@
     scroll-behavior: smooth;
     font-family: 'Poppins', sans-serif;
 }
+
+.nav-link.active svg path{
+    fill: white;
+    color: white;
+    /* background-color: white; */
+}

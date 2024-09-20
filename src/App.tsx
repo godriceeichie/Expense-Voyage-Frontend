@@ -1,6 +1,14 @@
 import "./App.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { ForgotPassword, Login, ResetPassword, Signup } from "./pages";
+import {
+  DashboardExpenses,
+  DashboardTrips,
+  DashboardUserProfile,
+  ForgotPassword,
+  Login,
+  ResetPassword,
+  Signup,
+} from "./pages";
 import DashHome from "./pages/dashboard/DashHome";
 import { UserDashLayout } from "./layout/index";
 import { Toaster } from "react-hot-toast";
@@ -14,11 +22,11 @@ function App() {
         { path: "login", element: <Login /> },
         { path: "signup", element: <Signup /> },
         { path: "forgot-password", element: <ForgotPassword /> },
-        { path: "reset-password/:token", element: <ResetPassword />}
+        { path: "reset-password/:token", element: <ResetPassword /> },
       ],
     },
     {
-      path: "/dashboard/home",
+      path: "/dashboard/",
       element: (
         <AuthMiddleware>
           <UserDashLayout />
@@ -26,8 +34,20 @@ function App() {
       ),
       children: [
         {
-          index: true,
+          path: "home",
           element: <DashHome />,
+        },
+        {
+          path: "trips",
+          element: <DashboardTrips />,
+        },
+        {
+          path: "expenses",
+          element: <DashboardExpenses />,
+        },
+        {
+          path: "settings/profile",
+          element: <DashboardUserProfile />,
         },
       ],
     },
