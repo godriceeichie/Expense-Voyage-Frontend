@@ -43,7 +43,7 @@ class FlightServices{
             )
 
             console.log(response.data)
-            return response
+            return response.data
         }catch(error : any){
             console.log(error)
             if (error.response) {
