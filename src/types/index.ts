@@ -4,7 +4,13 @@ export type UserType = {
   id: number;
   name: string;
   email: string;
+  phone_number: string | null;
 };
+
+export type UserProfileFieldType = {
+    name: string;
+    phone_number: string
+}
 
 export type AuthContextType = {
   user: UserType | null;

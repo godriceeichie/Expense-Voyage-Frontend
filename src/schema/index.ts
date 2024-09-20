@@ -37,3 +37,11 @@ export const resetPasswordVal = z
     message: "Passwords don't match",
     path: ["confirmPassword"],
   });
+
+export const userProfileVal = z.object({
+    name: z
+    .string({ required_error: "Name is required" })
+    .trim()
+    .min(3, { message: "Name should not be less than 3 characters" }),
+    phone_number: z.string().min(11, {message: "Invalid phone number"}).optional()
+})

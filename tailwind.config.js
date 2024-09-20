@@ -4,6 +4,9 @@ export default {
   theme: {
     extend: {
       // text-[#8a8e8b]
+      fontFamily: {
+        poppins: ["Poppins", "sans-serif"]
+      },
       colors: {
         "primary-color": "#004010",
         "text-color-900": "#001606",
