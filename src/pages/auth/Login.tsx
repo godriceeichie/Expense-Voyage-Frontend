@@ -1,13 +1,15 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Loader } from "@mantine/core";
 import { loginVal } from "../../schema";
 import useAuth from "../../hooks/useAuth";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { api } from "../../api";
 import { MdError } from "react-icons/md";
+import { Logo } from "../../components";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
@@ -65,15 +67,24 @@ const Login = () => {
       });
   };
 
+  useEffect(() => {
+    let fromParam = queryParams.get("from");
+
+    if (fromParam == "forgot-password") {
+      toast.success("Your password has been successfully reset");
+    }
+  }, []);
+
   return (
     <div className="flex items-center justify-center h-screen px-4">
       <div className="w-full max-w-[400px] mx-auto rounded-lg ring-1 ring-slate-900/5 shadow py-6 px-5 sm:w-4/5 md:w-3/5 lg:w-2/5 flex flex-col items-center">
         {/* <img src={nnpcLogo} alt="" className="w-14" /> */}
+        <Logo />
         <header className="mt-2 mb-4">
           <h1 className="text-center text-text-color-900 font-semibold text-xl">
             Welcome Back
           </h1>
-          <p className="text-sm text-[#8a8e8b] ">
+          <p className="text-sm text-[#8a8e8b]">
             Enter your credentials to continue
           </p>
         </header>
@@ -97,28 +108,42 @@ const Login = () => {
             <input
               type="email"
               id="email"
-              className="border border-[#cfd4d0] outline-none rounded-lg py-2 px-4 placeholder:text-[15px]"
+              className="border border-[#cfd4d0] outline-none rounded-lg py-2 px-3 placeholder:text-[15px]"
               {...register("email")}
               placeholder="Enter your email"
             />
             {errors.email && (
-              <p className="text-sm text-red-500">{errors.email.message}</p>
+              <p className="text-sm text-error-color flex gap-1 items-center">
+                <MdError /> {errors.email.message}
+              </p>
             )}
           </div>
-          <div className="flex flex-col gap-1">
-            <label htmlFor="password" className="font-medium">
-              Password
-            </label>
-            <input
-              type="password"
-              id="password"
-              className="border border-[#cfd4d0] outline-none rounded-lg py-2 px-4 placeholder:text-[15px]"
-              placeholder="Enter your password"
-              {...register("password")}
-            />
-            {errors.password && (
-              <p className="text-sm text-red-500">{errors.password.message}</p>
-            )}
+          <div>
+            <div className="flex flex-col gap-1">
+              <label htmlFor="password" className="font-medium">
+                Password
+              </label>
+              <input
+                type="password"
+                id="password"
+                className="border border-[#cfd4d0] outline-none rounded-lg py-2 px-3 placeholder:text-[15px]"
+                placeholder="Enter your password"
+                {...register("password")}
+              />
+              {errors.password && (
+                <p className="text-sm text-error-color flex gap-1 items-center">
+                  <MdError /> {errors.password.message}
+                </p>
+              )}
+            </div>
+            <div className="flex justify-end mt-1">
+              <Link
+                to={"/auth/forgot-password"}
+                className="text-sm underline transition-all w-full text-right hover:font-medium"
+              >
+                Forgot Password?
+              </Link>
+            </div>
           </div>
           <button
             type="submit"
