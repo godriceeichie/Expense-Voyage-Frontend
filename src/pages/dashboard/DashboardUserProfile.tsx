@@ -12,7 +12,7 @@ import toast from "react-hot-toast";
 const DashboardUserProfile = () => {
   const [activeTab, setActiveTab] = useState<string | null>("user-details");
   const [loading, setLoading] = useState(false);
-  const [loading2, setLoading2] = useState(false);
+  // const [loading2, setLoading2] = useState(false);
   const [value, setValue] = useState<ComboboxItem | null>(null);
 
   const { user, setUser } = useAuth();
@@ -176,7 +176,7 @@ const DashboardUserProfile = () => {
               }}
             />
 
-            <button
+            {/* <button
               disabled={loading2 || !isDirty}
               className={`${
                 loading || !isDirty
@@ -185,7 +185,7 @@ const DashboardUserProfile = () => {
               } transition text-white py-2 px-4 rounded-lg font-medium flex items-center justify-center w-fit`}
             >
               {loading ? <Loader size={"sm"} color="white" /> : "Save"}
-            </button>
+            </button> */}
           </div>
         </Tabs.Panel>
       </Tabs>
