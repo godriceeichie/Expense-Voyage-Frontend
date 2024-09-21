@@ -13,7 +13,7 @@ const Navbar = () => {
                 <li><Link to={"/about"}>About</Link></li>
                 <li><Link to={"/contact"}>Contact</Link></li>
             </ul>
-            <div className='btn-container'>
+            <div className='flex gap-4'>
                 <button className='text-base'>Log In</button>
                 <button className='bg-primary-color text-base text-white px-4 py-2 rounded-full font-medium' >Sign Up</button>
             </div>

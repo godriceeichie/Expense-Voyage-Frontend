@@ -3,6 +3,7 @@ import img from '../assets/view.png'
 import img3 from '../assets/blurryexpense.webp'
 import img4 from '../assets/currency.webp'
 import img5 from '../assets/clock.webp'
+import img2 from '../assets/itinerary.jpeg'
 import { Navbar } from '../components';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer'
@@ -32,7 +33,7 @@ const Home = () => {
                     <p className='text-[#6e706e] lg:text-xl max-w-xl'>Plan and organize your destinations, activities, and accommodations with ease.</p>
                 </div>
                 <div className='lg:-order-last md:-order-last'>
-                    <img src={img3} className='rounded-lg lg:h-[500px] w-full lg:w-[500px]' alt="Nice View" />
+                    <img src={img2} className='rounded-lg lg:h-[500px] w-full lg:w-[500px]' alt="Nice View" />
                 </div>
             </div>
             {/* Expenses */}
