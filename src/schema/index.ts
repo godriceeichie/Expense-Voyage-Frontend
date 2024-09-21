@@ -8,9 +8,7 @@ export const loginVal = z.object({
     .min(6, { message: "Password should not be less than 6 characters" }),
 });
 
-<<<<<<< HEAD
 
-=======
 export const signupVal = z.object({
   name: z
     .string({ required_error: "Name is required" })
@@ -40,4 +38,3 @@ export const resetPasswordVal = z
     message: "Passwords don't match",
     path: ["confirmPassword"],
   });
->>>>>>> 0bc248bb265914eed1201b54af48d45e04a6257f

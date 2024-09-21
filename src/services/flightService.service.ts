@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { BookFlightType } from '../types';
+import { BookFlightType, FindHotelType } from '../types';
 
 class FlightServices{
     constructor() {
@@ -34,7 +34,7 @@ class FlightServices{
                       destinationLocationCode: data.destination,
                       departureDate: data.date,
                       adults: data.max,
-                      max: 5,
+                      max: 35,
                     },
                     headers: {
                       'Authorization': `Bearer ${token}`,
@@ -52,6 +52,51 @@ class FlightServices{
                 console.error('Error:', error.message);
               }
         }
+    }
+
+    async findHotel(data: FindHotelType){
+      const token = await this.getAccessToken()
+      try{
+        const response = await axios.get('https://test.api.amadeus.com/v1/reference-data/locations/hotels/by-city',
+          {
+            params: {
+              cityCode: data.location,
+              ratings: Number(data.hotel_rating),
+              amenities: data.amenitites,
+          },
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+          }
+        )
+
+        console.log(response.data)
+        return response.data
+      }catch(error){
+        console.log(error)
+      }
+    }
+
+    // Booking a hotel
+    async BookHotel(){
+      const token = await this.getAccessToken()
+      try{
+        const response = await axios.get('https://test.api.amadeus.com/v3/shopping/hotel-offers', {
+            params: {
+              hotelIds: 'CXCHI782',
+              roomQuantity: 1,
+              adults: 1,
+              checkInDate: '2024-09-22'
+            },
+            headers: {
+              'Authorization': `Bearer ${token}`,
+            },
+        })
+        console.log(response.data)
+        return response.data;
+      }catch(error){
+        console.log(error)
+      }
     }
 }
 

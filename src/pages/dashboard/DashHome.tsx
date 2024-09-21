@@ -1,16 +1,10 @@
 import { Box, Button, Flex, Text } from "@mantine/core";
 import { RiPieChart2Line } from "react-icons/ri";
 import { FaDollarSign } from "react-icons/fa";
-<<<<<<< HEAD
 import '../../styles/dashboard.css'
 import '../../styles/dashHome.css'
 import {Itinerary, PopularTrips, UpcomingTrips, } from '../../components/index'
 
-=======
-import "../../styles/dashboard.css";
-import "../../styles/dashHome.css";
-import { Itinerary, UpcomingTrips } from "../../components/index";
->>>>>>> 0bc248bb265914eed1201b54af48d45e04a6257f
 
 const DashHome = () => {
   return (
@@ -185,14 +179,9 @@ const DashHome = () => {
         <Box w={"100%"} className="flex flexContainer gap-5">
           <Box className="allCon bestSeller flex">
             {/* <PopularProduct/> */}
-<<<<<<< HEAD
             <PopularTrips/>
         </Box>
         <Box className="allCon largeCon orderTable flex">
-=======
-          </Box>
-          <Box className="allCon largeCon orderTable flex">
->>>>>>> 0bc248bb265914eed1201b54af48d45e04a6257f
             {/* <OrderTable/> */}
             <Itinerary />
           </Box>

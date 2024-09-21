@@ -1,4 +1,4 @@
-import { Box, Button, Kbd, Loader, NumberInput, Select, Text } from "@mantine/core"
+import { Box, Button,  Loader, NumberInput, Select, Text } from "@mantine/core"
 import { FlightServices } from "../services"
 import { DateInput } from "@mantine/dates"
 import '../styles/addTrip.css'
@@ -8,7 +8,7 @@ import { BookFlightType } from "../types"
 import { useForm } from '@mantine/form';
 import { LuPlaneLanding, LuPlaneTakeoff } from "react-icons/lu";
 import { MdConnectingAirports } from "react-icons/md";
-import { formatDate, formatDuration, getAirportName, getCurrencySymbol } from "../scripts/chunckArray"
+import { formatDate, formatDuration, getAirlineName, getAirportName, getCurrencySymbol } from "../scripts/chunckArray"
 
 
 
@@ -21,11 +21,7 @@ interface flightData{
         nextStep: number
        }) => void;
 }
-interface nextPage{
-   onFlightSelect: (data: {
-    nextStep: number
-   }) => void;
-}
+
 const SearchFlightForm = ( {data }: {data: flightData}) => {
     const flightServices = new FlightServices()
     const [loading, setLoading] = useState(false);
@@ -64,7 +60,7 @@ console.log(flightForm.values.date)
       <Box>
         <form action="" onSubmit={flightForm.onSubmit(BookFlight)} className="flex flex-col gap-5 pt-6">
             <Box className="flex justify-center">
-                <Text className="text-3xl font-bold text-center">Search for your flight now</Text>
+                <Text className="text-2xl font-semibold text-center">Search for your flight now</Text>
             </Box>
             <Box className="flex gap-4 items-start justify-center">
                <Box className="flex flex-col justify-end">
@@ -142,8 +138,10 @@ console.log(flightForm.values.date)
                 {
                     seenFlights.map((flight:any)=>{
                         return (
-                            <Box key={flight.id} className="flex justify-between p-6 w-full bg-white rounded-xl">
-
+                            <Box key={flight.id} className="flex flex-col gap-5 justify-between shadow-xl p-6 w-full bg-white rounded-xl">
+                                <Box>
+                                  <Text className="text-xl font-semibold">{getAirlineName(flight.validatingAirlineCodes[0])}</Text>
+                                </Box>
                                 <Box className="flex w-full justify-between gap-5">
                                 <Box className="flex flex-col gap-3">
                                    <Text className="flex gap-1">

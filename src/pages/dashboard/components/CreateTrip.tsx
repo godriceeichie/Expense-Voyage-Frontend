@@ -148,6 +148,8 @@ const CreateTrip = ({onSubmitTripData }:CreateTripProps) => {
         <Button type="submit" className="w-2/5 bg-primary-color hover:bg-green-800">Add Trip</Button>
         </Box>
       </form>
+
+      {/* <SearchHotel/> */}
     </>
   )
 }

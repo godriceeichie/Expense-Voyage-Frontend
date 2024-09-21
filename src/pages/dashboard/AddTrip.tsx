@@ -1,8 +1,8 @@
-import { Box, Button,  Group, Stepper,  Tabs,  Text,  rem } from "@mantine/core"
+import { Box,  Group, Stepper,  Tabs,  Text,  rem } from "@mantine/core"
 import { useState } from "react";
 import { FaRegCalendarAlt, FaRegCalendarCheck  } from "react-icons/fa";
 import { SearchFlightForm } from "../../components";
-import { CreateTrip } from "./components";
+import { CreateTrip, SearchHotel } from "./components";
 import { GiCommercialAirplane } from "react-icons/gi";
 import { FaPlane } from "react-icons/fa";
 import { FaPlaneCircleCheck } from "react-icons/fa6";
@@ -28,7 +28,7 @@ const AddTrip = () => {
         nextStep: number
       }) => {
         console.log("Received trip data:", data);
-        const date = data.start_date
+        // const date = data.start_date
         setLocation(data.location)
         setDestination(data.destination)
         setActive(data.nextStep)
@@ -40,7 +40,14 @@ const AddTrip = () => {
       }) =>{
         setActive(data.nextStep)
       }
-   
+      const [hotelID, setHotelID] = useState('')
+   const handleFindHotel = (data: {
+    nextStep: number
+    hotelId: string
+   })=> {
+    setActive(data.nextStep)
+    setHotelID(data.hotelId)
+   }
       
   return (
     <>
@@ -51,7 +58,7 @@ const AddTrip = () => {
         <Stepper.Step icon={<FaPlane height={rem(18)} width={rem(18)}/>} completedIcon={<FaPlaneCircleCheck  />} label="Transportation" description="Pick a means of Transport">
           {/* <PickLocationPage/> */}
             <Text className="text-center font-bold text-3xl my-5">Choose a Means of Transportation</Text>
-          <Tabs color="green" defaultValue={'Flight'}>
+          <Tabs color="green"   defaultValue={'Flight'}>
         <Tabs.List>
             <Tabs.Tab value="Flight" leftSection={<GiCommercialAirplane />}>
             Flight
@@ -60,16 +67,19 @@ const AddTrip = () => {
             Ship
             </Tabs.Tab>
         </Tabs.List>
-        <Tabs.Panel value="Flight">
+        <Tabs.Panel value="Flight" >
+        <Box className="">
         <SearchFlightForm  data={{destination: Destination, location: location, time: depatureDate, onFlightSelect: handleFlightDate}} />
-
+        </Box>
         
         </Tabs.Panel>
       </Tabs>
         </Stepper.Step>
         <Stepper.Step label="Flight" description="Book a Flight">
-        
-           
+          {hotelID}
+            <SearchHotel  data={{location: Destination, onHotelSelect: handleFindHotel}}/>
+            
+
         </Stepper.Step>
         <Stepper.Completed>
           Completed, click back button to get to previous step
