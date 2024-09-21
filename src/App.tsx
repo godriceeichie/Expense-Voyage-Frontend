@@ -1,10 +1,10 @@
 import './App.css'
 import { createBrowserRouter,  RouterProvider } from 'react-router-dom'
-import { Login, Signup } from './pages'
+import { Gallery, Home, Login, Signup } from './pages'
 import DashHome from './pages/dashboard/DashHome'
 import { UserDashLayout } from './layout/index'
 import { Toaster } from 'react-hot-toast'
-import Landingpage from './pages/landingpage/landingpage'
+import Landingpage from './pages/Home'
 
 function App() {
   const router = createBrowserRouter(
@@ -16,6 +16,14 @@ function App() {
         {path:"login", element: <Login />},
         {path:"signup", element: <Signup />}
       ]
+    },
+    {
+      path: '/',
+      element: <Home />
+    },
+    {
+      path: '/explore',
+      element: <Gallery/>
     },
     {
       path: '/dashboard/home', element: <UserDashLayout/>,

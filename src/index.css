@@ -6,6 +6,7 @@
 
 body{
     font-family: Inter, "sans-serif";
+    font-size: 16px;
 }
 
 .lato-thin {
@@ -67,4 +68,6 @@ body{
     font-weight: 900;
     font-style: italic;
   }
+
+  
   
