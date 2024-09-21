@@ -1,6 +1,5 @@
 // import './landingpage.css';
 import img from '../assets/view.png'
-import img2 from '../assets/itinerary.jpeg'
 import img3 from '../assets/blurryexpense.webp'
 import img4 from '../assets/currency.webp'
 import img5 from '../assets/clock.webp'
