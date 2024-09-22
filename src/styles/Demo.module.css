@@ -47,3 +47,16 @@
     max-width: 100%; /* Ensures that the container won't shrink */
     overflow: hidden;  /* Optional: To prevent any horizontal overflow */
   }
+
+  .controls {
+    transition: opacity 150ms ease;
+    opacity: 0;
+  }
+  
+  .root {
+    &:hover {
+      .controls {
+        opacity: 1;
+      }
+    }
+  }

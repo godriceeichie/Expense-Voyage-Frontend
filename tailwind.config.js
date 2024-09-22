@@ -4,8 +4,15 @@ export default {
   theme: {
     extend: {
       // text-[#8a8e8b]
+      fontFamily: {
+        poppins: ["Poppins", "sans-serif"]
+      },
+      screens: {
+        'xs': '200px',
+      },
       colors: {
         "primary-color": "#004010",
+        "primary-text-color": "#8a8e8b",
         "text-color-900": "#001606",
         "error-color": "#FF3838",
       },

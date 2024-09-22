@@ -10,11 +10,13 @@ import { api } from "../../api";
 import { MdError } from "react-icons/md";
 import { Logo } from "../../components";
 import toast from "react-hot-toast";
+import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
   const { setAccessToken, setUser, setCSRFToken } = useAuth();
   const [errorMsg, setErrorMsg] = useState("");
+  const [visibility, setVisibility] = useState(false);
 
   const navigate = useNavigate();
 
@@ -108,7 +110,7 @@ const Login = () => {
             <input
               type="email"
               id="email"
-              className="border border-[#cfd4d0] outline-none rounded-lg py-2 px-3 placeholder:text-[15px]"
+              className="border border-[#cfd4d0] placeholder:text-[#b2b7b3] focus:outline-primary-color outline-none rounded-lg py-2 px-4 placeholder:text-[15px]"
               {...register("email")}
               placeholder="Enter your email"
             />
@@ -123,13 +125,23 @@ const Login = () => {
               <label htmlFor="password" className="font-medium">
                 Password
               </label>
-              <input
-                type="password"
-                id="password"
-                className="border border-[#cfd4d0] outline-none rounded-lg py-2 px-3 placeholder:text-[15px]"
-                placeholder="Enter your password"
-                {...register("password")}
-              />
+              <div className="bg-transparent border border-[#cfd4d0] rounded-lg has-[:focus]:border-none has-[:focus]:ring-2 has-[:focus]:ring-[#1a6d2e] px-3 flex items-center">
+                <input
+                  type={visibility ? "text" : "password"}
+                  placeholder="Enter your password"
+                  className="bg-transparent placeholder:text-[15px] placeholder:text-[#b2b7b3] py-2 focus:outline-none w-full"
+                  {...register("password")}
+                />
+                {visibility ? (
+                  <button type="button" onClick={() => setVisibility(false)}>
+                    <IoEyeOffOutline size={20} className="text-[#545654]" />
+                  </button>
+                ) : (
+                  <button type="button" onClick={() => setVisibility(true)}>
+                    <IoEyeOutline size={20} />
+                  </button>
+                )}
+              </div>
               {errors.password && (
                 <p className="text-sm text-error-color flex gap-1 items-center">
                   <MdError /> {errors.password.message}

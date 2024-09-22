@@ -8,6 +8,7 @@ import { Loader } from "@mantine/core";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { MdError } from "react-icons/md";
+import { Logo } from "../../components";
 
 const Signup = () => {
   const [loading, setLoading] = useState(false);
@@ -47,7 +48,7 @@ const Signup = () => {
       .post("/auth/signup", data)
       .then(() => {
         setLoading(false);
-        navigate("/");
+        navigate("/dashboard/home");
       })
       .catch((err) => {
         setLoading(false);
@@ -69,7 +70,7 @@ const Signup = () => {
   return (
     <div className="flex items-center justify-center h-screen px-4">
       <div className="w-full max-w-[400px] mx-auto rounded-lg ring-1 ring-slate-900/5 shadow py-6 px-5 sm:w-4/5 md:w-3/5 lg:w-2/5 flex flex-col items-center">
-        {/* <img src={nnpcLogo} alt="" className="w-14" /> */}
+        <Logo />
         <header className="mt-2 mb-4 flex flex-col items-center">
           <h1 className="text-center text-text-color-900 font-bold text-xl">
             Welcome to Expense Voyage
@@ -87,7 +88,7 @@ const Signup = () => {
             <input
               type="text"
               id="name"
-              className="border border-[#cfd4d0] outline-none rounded-lg py-2 px-4 placeholder:text-[15px]"
+              className="border border-[#cfd4d0] placeholder:text-[#b2b7b3] focus:outline-primary-color outline-none rounded-lg py-2 px-4 placeholder:text-[15px]"
               {...register("name")}
               placeholder="Enter your name"
             />
@@ -104,12 +105,14 @@ const Signup = () => {
             <input
               type="email"
               id="email"
-              className="border border-[#cfd4d0] outline-none rounded-lg py-2 px-4 placeholder:text-[15px]"
+              className="border border-[#cfd4d0] placeholder:text-[#b2b7b3] focus:outline-primary-color outline-none rounded-lg py-2 px-4 placeholder:text-[15px]"
               {...register("email")}
               placeholder="Enter your email"
             />
             {errors.email && (
-              <p className="text-sm text-red-500">{errors.email.message}</p>
+              <p className="text-sm text-red-500 flex gap-1 items-center">
+                <MdError /> {errors.email.message}
+              </p>
             )}
           </div>
           <div className="flex flex-col gap-1">
@@ -119,7 +122,7 @@ const Signup = () => {
             <input
               type="password"
               id="password"
-              className="border border-[#cfd4d0] outline-none rounded-lg py-2 px-4 placeholder:text-[15px]"
+              className="border border-[#cfd4d0] placeholder:text-[#b2b7b3] focus:outline-primary-color outline-none rounded-lg py-2 px-4 placeholder:text-[15px]"
               placeholder="Enter your password"
               {...register("password")}
             />
