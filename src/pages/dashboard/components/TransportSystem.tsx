@@ -1,6 +1,5 @@
 import { Tabs } from "@mantine/core"
 import { GiCommercialAirplane } from "react-icons/gi";
-import { SearchFlightForm } from "../../../components";
 
 const TransportSystem = () => {
   return (
