@@ -29,6 +29,14 @@ export type SignupFieldType = {
   password: string;
 };
 
+
+
+export type BookFlightType ={
+    location: string
+    destination: string
+    date: string
+    max: number
+}
 export type EmailType = {
   email: string;
 };
@@ -37,3 +45,10 @@ export type ResetPasswordFieldType = {
   password: string;
   confirmPassword: string;
 };
+
+
+export type FindHotelType = {
+  location: string
+  hotel_rating: string
+   amenitites: string
+}

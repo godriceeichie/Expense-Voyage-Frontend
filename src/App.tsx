@@ -1,3 +1,7 @@
+import './App.css'
+
+// import DashHome from './pages/dashboard/DashHome'
+import {DashHome, AddTrip} from './pages/dashboard'
 import "./App.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Gallery, Home,
@@ -9,7 +13,6 @@ import { Gallery, Home,
   ResetPassword,
   Signup,
 } from "./pages";
-import DashHome from "./pages/dashboard/DashHome";
 import { Root, UserDashLayout } from "./layout/index";
 import { Toaster } from "react-hot-toast";
 import AuthMiddleware from "./middleware/AuthMiddleware";
@@ -84,6 +87,7 @@ function App() {
           path: "settings/profile",
           element: <DashboardUserProfile />,
         },
+        {path: 'add-trip', element: <AddTrip/>}
       ],
     },
   ]);

@@ -48,7 +48,7 @@ const Signup = () => {
       .post("/auth/signup", data)
       .then(() => {
         setLoading(false);
-        navigate("/dashboard/home/");
+        navigate("/dashboard/home");
       })
       .catch((err) => {
         setLoading(false);
