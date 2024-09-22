@@ -2,11 +2,13 @@ import { Box, Button, Flex, Select, Text } from "@mantine/core"
 import { FlightServices } from "../../../services"
 import { HotelAmenitiesList } from "../data/createTripDatas"
 import { useForm } from '@mantine/form';
-import { FindHotelType } from "../../../types";
+import { CreateItineraryItemType, FindHotelType } from "../../../types";
 import { SubmitHandler } from "react-hook-form";
 import { useState } from "react";
 import { FcRating } from "react-icons/fc";
 import { LuHotel,  } from "react-icons/lu";
+import { retrieveFromLocalStorage, saveToLocalStorage } from "../../../scripts/chunckArray";
+import usePrivateApi from "../../../hooks/usePrivateApi";
 
 interface hotelInterface {
     location: string
@@ -20,7 +22,7 @@ interface hotelInterface {
 
 const SearchHotel = ({ data }: { data: hotelInterface }) => {
     const flightServices = new FlightServices()
-
+    const privateApi = usePrivateApi()
     const hotelForm = useForm({
         mode: 'uncontrolled',
         initialValues: { location: data.location, hotel_rating: '', amenitites: '', },
@@ -48,7 +50,44 @@ const SearchHotel = ({ data }: { data: hotelInterface }) => {
             setLoading(false)
         }
     }
+    const saveHotel = async (hotelID: string, hotel_name: string)=>{
+        const data = await flightServices.findHotelByID(hotelID)
+        if(data){
+            saveToLocalStorage({
+                'hotel_name': hotel_name,
+            })
+        }
+        
+    }
+    const [loadingHotel, setLoadingHotel] = useState(false)
 
+    const localData = retrieveFromLocalStorage(['arrival_time', 'arrival_airport'])
+        // localData
+        // console.log(localData)
+    const addItineraryItem = async(hotelName: string)=>{
+        setLoadingHotel(true)
+        console.log('add itinerary function...')
+        const itineraryID = retrieveFromLocalStorage('itinerary_ID')
+       
+        try{
+          const response = await privateApi.post(`/trip/${itineraryID}/itinerary-items/`,
+             {
+                item_type: 'lodge',
+                transport_type: 'bus',
+                departure_location: localData.arrival_airport,
+                arrival_location: hotelName, 
+                arrival_time: localData.arrival_time,
+                departure_time: ''
+             }
+          )
+          console.log(response.data)
+          
+          setLoadingHotel(false)
+        }catch(error){
+          console.log(error)
+          setLoadingHotel(true)
+        }
+      }
     return (
         <>
             <Box>
@@ -57,8 +96,8 @@ const SearchHotel = ({ data }: { data: hotelInterface }) => {
                     <Flex className="gap-7 items-center">
                         <Flex className="gap-7 items-end">
                             <Select
-                                defaultValue={location}
-                                value={location}
+                                defaultValue={data.location}
+                                value={data.location}
                                 data={[
                                     { value: 'LON', label: 'London' },
                                     { value: 'CHI', label: 'China' },
@@ -139,7 +178,10 @@ const SearchHotel = ({ data }: { data: hotelInterface }) => {
                                             <Box className=" flex justify-end w-full items-end">
                                                 <Button className="bg-primary-color hover:bg-green-700 transition"
                                                 onClick={()=>{
-                                                    flightServices.BookHotel()
+                                                    saveHotel(hotel.hotelId, hotel.name)
+                                                   
+                                                    retrieveFromLocalStorage(['arrival_time', 'arrival_airport'])
+                                                    addItineraryItem(hotel.name)
                                                 }}
                                                 >
                                                     Check Availability</Button>

@@ -8,8 +8,8 @@ export type UserType = {
 };
 
 export type UserProfileFieldType = {
-    name: string;
-    phone_number: string
+  name: string;
+  phone_number: string
 }
 
 export type AuthContextType = {
@@ -31,11 +31,11 @@ export type SignupFieldType = {
 
 
 
-export type BookFlightType ={
-    location: string
-    destination: string
-    date: string
-    max: number
+export type BookFlightType = {
+  location: string
+  destination: string
+  date: string
+  max: number
 }
 export type EmailType = {
   email: string;
@@ -47,8 +47,26 @@ export type ResetPasswordFieldType = {
 };
 
 
+export type CreateTripType = {
+  trip_name: string,
+  destination: string,
+  start_date: Date | null,
+  end_date: Date | null,
+  budget: number
+}
 export type FindHotelType = {
   location: string
   hotel_rating: string
-   amenitites: string
+  amenitites: string
+}
+
+
+export type CreateItineraryItemType ={
+  item_type:string,
+    transport_type: string,
+    departure_location: string,
+    arrival_location: string, 
+    departure_time: Date | null, 
+    arrival_time: Date | null,
+
 }

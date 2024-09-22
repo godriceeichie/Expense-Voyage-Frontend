@@ -4,11 +4,12 @@ import { DateInput } from "@mantine/dates"
 import '../styles/addTrip.css'
 import { useState } from "react"
 import { SubmitHandler } from "react-hook-form";
-import { BookFlightType } from "../types"
+import { BookFlightType, CreateItineraryItemType } from "../types"
 import { useForm } from '@mantine/form';
 import { LuPlaneLanding, LuPlaneTakeoff } from "react-icons/lu";
 import { MdConnectingAirports } from "react-icons/md";
-import { formatDate, formatDuration, getAirlineName, getAirportName, getCurrencySymbol } from "../scripts/chunckArray"
+import { formatDate, formatDuration, getAirlineName, getAirportName, getCurrencySymbol, retrieveFromLocalStorage, saveToLocalStorage } from "../scripts/chunckArray"
+import usePrivateApi from "../hooks/usePrivateApi"
 
 
 
@@ -24,6 +25,7 @@ interface flightData{
 
 const SearchFlightForm = ( {data }: {data: flightData}) => {
     const flightServices = new FlightServices()
+    const privateApi = usePrivateApi()
     const [loading, setLoading] = useState(false);
 
     const [seenFlights, setSeenFlights] = useState<[]>([])
@@ -35,7 +37,7 @@ const SearchFlightForm = ( {data }: {data: flightData}) => {
             const date = new Date(data.date)
             const formattedDate = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
             const response = await flightServices.searchFlight({location: data.location, destination:data.destination, date: formattedDate, max: data.max})
-
+            
             console.log(response.data)
             setSeenFlights(response?.data)
             setLoading(false)
@@ -55,6 +57,23 @@ const SearchFlightForm = ( {data }: {data: flightData}) => {
         },
       });
 console.log(flightForm.values.date)
+const [flightloading, setFlightLoading] = useState(false)
+
+const addItineraryItem = async(data: CreateItineraryItemType)=>{
+  setFlightLoading(true)
+  console.log('add itinerary function...')
+  const itineraryID = retrieveFromLocalStorage('itinerary_ID')
+  try{
+    const response = await privateApi.post(`/trip/${itineraryID}/itinerary-items/`,
+       data
+    )
+    console.log(response.data)
+    setFlightLoading(false)
+  }catch(error){
+    console.log(error)
+    setFlightLoading(true)
+  }
+}
   return (
     <>
       <Box>
@@ -218,17 +237,36 @@ console.log(flightForm.values.date)
                                             flight.price.total
                                         }
                                     </Text>
-                                  <Button className="bg-primary-color hover:bg-green-700 transition"
+                                  <Button disabled={flightloading} className="bg-primary-color hover:bg-green-700  transition"
                                   onClick={()=>{
+                                    saveToLocalStorage({
+                                      'departure_time':  formatDate(
+                                      flight.itineraries[0].segments[0].departure.at),
+                                      'departure_airport': getAirportName(flight.itineraries[0].segments[0].departure.iataCode),
+                                      'arrival_time':
+                                        flight.itineraries[0].segments[0].arrival.at
+                                    ,
+                                    'arrival_airport': getAirportName(flight.itineraries[0].segments[0].arrival.iataCode),
+                                    'air_line': getAirlineName(flight.validatingAirlineCodes[0]),
+                                    'ticket_price': flight.price.total
+                                })
+                                addItineraryItem({
+                                  arrival_location: getAirportName(flight.itineraries[0].segments[0].arrival.iataCode),
+                                  arrival_time: flight.itineraries[0].segments[0].arrival.at,
+                                  departure_location: getAirportName(flight.itineraries[0].segments[0].departure.iataCode),
+                                  departure_time: flight.itineraries[0].segments[0].departure.at,
+                                  item_type: 'transport',
+                                  transport_type: 'flight'
+                                })
                                     data.onFlightSelect({nextStep: 2})
                                   }}
                                   >
-                                    Book Flight</Button>
+                                    {
+                                      flightloading ? <Loader color="green" size={30}/> : 'Book Flight'
+                                    }</Button>
                                   </Box>
                                     
                                 </Box>
-                                <Box></Box>
-                                <Box></Box>
                             </Box>
                         )
                     })

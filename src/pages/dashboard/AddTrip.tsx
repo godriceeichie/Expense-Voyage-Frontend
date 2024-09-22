@@ -19,7 +19,7 @@ const AddTrip = () => {
     
 
     const handleTripData = (data: {
-        tripName: string;
+      trip_name: string;
         location: string;
         destination: string;
         start_date: Date | null;
@@ -51,11 +51,11 @@ const AddTrip = () => {
       
   return (
     <>
-        <Stepper active={active} onStepClick={setActive} allowNextStepsSelect={false}>
-        <Stepper.Step icon={<FaRegCalendarAlt />} completedIcon={<FaRegCalendarCheck className="text-white" width={rem(18)} height={rem(18)} />} label="Create a Trip" description="Pick a Date">
+        <Stepper active={active} onStepClick={setActive}  allowNextStepsSelect={false}>
+        <Stepper.Step icon={<FaRegCalendarAlt />} allowStepSelect={false} completedIcon={<FaRegCalendarCheck className="text-white" width={rem(18)} height={rem(18)} />} label="Create a Trip" description="Pick a Date">
         <CreateTrip onSubmitTripData={handleTripData}/>
         </Stepper.Step>
-        <Stepper.Step icon={<FaPlane height={rem(18)} width={rem(18)}/>} completedIcon={<FaPlaneCircleCheck  />} label="Transportation" description="Pick a means of Transport">
+        <Stepper.Step allowStepSelect={false} icon={<FaPlane height={rem(18)} width={rem(18)}/>} completedIcon={<FaPlaneCircleCheck  />} label="Transportation" description="Pick a means of Transport">
           {/* <PickLocationPage/> */}
             <Text className="text-center font-bold text-3xl my-5">Choose a Means of Transportation</Text>
           <Tabs color="green"   defaultValue={'Flight'}>
@@ -75,7 +75,7 @@ const AddTrip = () => {
         </Tabs.Panel>
       </Tabs>
         </Stepper.Step>
-        <Stepper.Step label="Flight" description="Book a Flight">
+        <Stepper.Step allowStepSelect={false} label="Flight" description="Book a Flight">
           {hotelID}
             <SearchHotel  data={{location: Destination, onHotelSelect: handleFindHotel}}/>
             

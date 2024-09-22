@@ -1,15 +1,20 @@
-import { Box, Button, Flex, NumberInput, Select, Text, TextInput } from "@mantine/core"
+import { Box, Button, Flex, Loader, NumberInput, Select, Text, TextInput } from "@mantine/core"
 import { DateTimePicker } from "@mantine/dates"
 import { MdCardTravel } from "react-icons/md";
 import { PiMapPinAreaBold } from "react-icons/pi";
 import { TbMapSearch } from "react-icons/tb";
 import { useForm } from '@mantine/form';
 import { useState } from "react";
+import { SubmitHandler } from "react-hook-form";
+import { CreateTripType } from "../../../types";
+// import { TripServices } from "../../../services";
+import usePrivateApi from "../../../hooks/usePrivateApi";
+import { saveToLocalStorage } from "../../../scripts/chunckArray";
 
 
 interface CreateTripProps {
     onSubmitTripData: (data: {
-      tripName: string;
+      trip_name: string;
       location: string;
       destination: string;
       start_date: Date | null;
@@ -21,12 +26,13 @@ interface CreateTripProps {
 
 
 const CreateTrip = ({onSubmitTripData }:CreateTripProps) => {
-
+  const privateApi = usePrivateApi()
+    // const tripService = new TripServices()
     const tripForm = useForm({
         mode: 'uncontrolled',
-        initialValues: { tripName: '',location: '', destination: '', start_date: null as Date | null, end_date: null as Date | null, budget: 0 },
+        initialValues: { trip_name: '',location: '', destination: '', start_date: null as Date | null, end_date: null as Date | null, budget: 0 },
         validate: {
-            tripName: (value)=> (value.length < 5? 'trip name cannot be less than 5 characters': null)
+            trip_name: (value)=> (value.length < 5? 'trip name cannot be less than 5 characters': null)
             ,
           location: (value) => (value.length < 2 ? 'Location must have at least 2 letters' : null),
           destination: (value) => (value.length < 2 ? 'Destination must have at least 2 letters' : null),
@@ -41,19 +47,55 @@ const CreateTrip = ({onSubmitTripData }:CreateTripProps) => {
 
       const [startDate, setStartDate] = useState<Date | null>();
 
+      const [loading, setLoading] = useState(false);
+      const [nextStep, setNextStep] = useState(0)
+      const MakeTrip: SubmitHandler<CreateTripType> = async (data, e) => {
+        e?.preventDefault();
+        setLoading(true);
+        try{
+            // const response = await tripService.CreateTrip(data)
+            const response = await privateApi.post('/trip/', {
+                trip_name: data.trip_name,
+                destination: data.destination,
+                start_date: data.start_date,
+                end_date: data.end_date,
+                budget: data.budget
+              
+            })
+           const ItineraryResponse = await privateApi.post('/trip/itineraries/',
+              {
+                title: data.trip_name
+              }
+            
+           )
+           console.log(ItineraryResponse)
+           saveToLocalStorage('itinerary_ID', ItineraryResponse.data.id)
+            console.log(response)
+            // if (response.data && ItineraryResponse.data) {
+              setNextStep(1)
+            // }
+            
+          setLoading(false)
+        }catch(error){
+          console.log(error)
+          setLoading(false)
+        }
+      }
+
   return (
     <>
       <form action="" onSubmit={tripForm.onSubmit((values)=>{
-        onSubmitTripData({tripName:values.tripName, location: values.location, destination: values.destination, start_date: values.start_date, end_date: values.end_date, budget: values.budget, nextStep: 1})
-        console.log(values)
+         saveToLocalStorage('location', values.location)
+        MakeTrip({budget: values.budget, destination: values.destination, end_date: values.end_date, start_date: values.start_date, trip_name: values.trip_name})
+        onSubmitTripData({trip_name:values.trip_name, location: values.location, destination: values.destination, start_date: values.start_date, end_date: values.end_date, budget: values.budget, nextStep: nextStep})
       })} className="flex flex-col gap-5 mt-6">
         <Text className="text-center text-3xl font-bold">Trip Information</Text>
         <Box className="flex gap-5 justify-center items-center w-full">
             <TextInput label={'Trip name'} placeholder="Christmas Vacation" 
             leftSection={<MdCardTravel />}
             className="w-1/3 text-xl"
-            key={tripForm.key('tripName')}
-            {...tripForm.getInputProps('tripName')}
+            key={tripForm.key('trip_name')}
+            {...tripForm.getInputProps('trip_name')}
             />
             <Select 
             data={[
@@ -145,7 +187,9 @@ const CreateTrip = ({onSubmitTripData }:CreateTripProps) => {
            />
         </Box>
         <Box className="w-full mt-5 flex justify-center items-center">
-        <Button type="submit" className="w-2/5 bg-primary-color hover:bg-green-800">Add Trip</Button>
+        <Button type="submit" disabled={loading} className="w-2/5 bg-primary-color hover:bg-green-800">
+          {loading?   <Loader size={30} /> : 'Add Trip'}
+        </Button>
         </Box>
       </form>
 

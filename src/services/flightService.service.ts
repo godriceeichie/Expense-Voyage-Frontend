@@ -83,10 +83,28 @@ class FlightServices{
       try{
         const response = await axios.get('https://test.api.amadeus.com/v3/shopping/hotel-offers', {
             params: {
-              hotelIds: 'CXCHI782',
+              hotelIds: 'LOCHILAN',
               roomQuantity: 1,
               adults: 1,
               checkInDate: '2024-09-22'
+            },
+            headers: {
+              'Authorization': `Bearer ${token}`,
+            },
+        })
+        console.log(response.data)
+        return response.data;
+      }catch(error){
+        console.log(error)
+      }
+    }
+    
+    async findHotelByID(hotelId: string){
+      const token = await this.getAccessToken()
+      try{
+        const response = await axios.get('https://test.api.amadeus.com/v1/reference-data/locations/hotels/by-hotels', {
+            params: {
+              hotelIds: hotelId
             },
             headers: {
               'Authorization': `Bearer ${token}`,

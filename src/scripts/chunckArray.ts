@@ -171,6 +171,58 @@ const airportCodes: { [key: string]: string } = {
   
     return `${formattedHours}:${formattedMinutes}${period}. ${day}, ${month}. ${year}`;
   }
+
+  export const convertToDateTime = (input: string): string => {
+    // First, remove the dot after the time
+    const cleanedInput = input.replace('.', '');
+  
+    // Define the format of the input string
+    const [timePart, dayPart, monthPart, yearPart] = cleanedInput.split(' ');
+  
+    // Parse the time part
+    const time = timePart.replace(/[APMapm]+/g, '');
+    const amPm = timePart.includes('PM') ? 'PM' : 'AM';
+    const [hours, minutes] = time.split(':').map(Number);
+  
+    let hours24 = hours;
+    if (amPm === 'PM' && hours !== 12) {
+      hours24 += 12;
+    } else if (amPm === 'AM' && hours === 12) {
+      hours24 = 0;
+    }
+  
+    // Map month names to numbers
+    const monthMap: Record<string, string> = {
+      Jan: '01',
+      Feb: '02',
+      Mar: '03',
+      Apr: '04',
+      May: '05',
+      Jun: '06',
+      Jul: '07',
+      Aug: '08',
+      Sept: '09', // corrected to "Sept" to match the input format
+      Oct: '10',
+      Nov: '11',
+      Dec: '12'
+    };
+  
+    const month = monthMap[monthPart.replace(',', '')];
+  
+    // Construct the final datetime string in the desired format
+    const date = `${yearPart}-${month}-${dayPart.replace(',', '')}`;
+    const time24 = `${hours24.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:00`;
+  
+    // Assuming the offset is always +01
+    const offset = '+01';
+  
+    return `${date} ${time24}${offset}`;
+  }
+  
+  // Example usage
+  const input = "7:50PM. 24, Sept. 2024";
+  const result = convertToDateTime(input);
+  console.log(result); // "2024-09-24 19:50:00+01"
   
  
   export const formatDuration = (duration: string): string =>{
@@ -390,3 +442,44 @@ export const getAirlineName =(code: keyof typeof airlineCodes) =>{
 }
 
 
+
+ type StorageValue = string | number | boolean;
+
+export function saveToLocalStorage(key: string, value: StorageValue): void;
+export function saveToLocalStorage(data: Record<string, StorageValue>): void;
+export function saveToLocalStorage(arg1: string | Record<string, StorageValue>, arg2?: StorageValue): void {
+  if (typeof arg1 === 'string' && arg2 !== undefined) {
+    // Save single key-value pair
+    localStorage.setItem(arg1, JSON.stringify(arg2));
+  } else if (typeof arg1 === 'object' && arg2 === undefined) {
+    // Save multiple key-value pairs
+    Object.keys(arg1).forEach((key) => {
+      localStorage.setItem(key, JSON.stringify(arg1[key]));
+      console.log(key + ' : ' + arg1)
+    });
+  } else {
+    throw new Error('Invalid arguments');
+  }
+}
+
+
+export function retrieveFromLocalStorage(key: string): StorageValue | null;
+export function retrieveFromLocalStorage(keys: string[]): Record<string, StorageValue | null>;
+export function retrieveFromLocalStorage(arg: string | string[]): StorageValue | null | Record<string, StorageValue | null> {
+  if (typeof arg === 'string') {
+    // Retrieve single key
+    const value = localStorage.getItem(arg);
+    return value ? JSON.parse(value) : null;
+  } else if (Array.isArray(arg)) {
+    // Retrieve multiple keys
+    const result: Record<string, StorageValue | null> = {};
+    arg.forEach((key) => {
+      const value = localStorage.getItem(key);
+      result[key] = value ? JSON.parse(value) : null;
+    });
+    console.log(result)
+    return result;
+  } else {
+    throw new Error('Invalid arguments');
+  }
+}
