@@ -22,34 +22,27 @@ import "../styles/dashHome.css";
 import "../styles/dashboard.css";
 import profile from "../assets/avatar.png";
 import DashboardSideBar from "../components/DashboardSideBar";
-import { Logo } from "../components";
+import { Logo, LogoutModal } from "../components";
 import { GoHome } from "react-icons/go";
+import { useDisclosure } from "@mantine/hooks";
+import useAuth from "../hooks/useAuth";
 
 const UserDashLayout = () => {
   const navigate = useNavigate();
+  const [opened, { open, close }] = useDisclosure(false);
+
+  const { user } = useAuth()
+
   return (
     <>
       <Box className=" flex w-full ">
         <Box
           className="gidden lg:flex flex-col sideBar sticky top-0 p-4 h-screen  overflow-y-scroll sidebar border-r border-r-[#E9E9E9] rounded-r-lg"
           color="#bbbad1"
-          //   bg={"#2e3349"}
           w={"25%"}
         >
           <Box className="flex flex-col w-full gap-12">
-            {/* <Box className="w-full flex justify-between items-center">
-              <Box className="w-1/2 flex items-center gap-2">
-                <Box className="w-10 h-10 bg-blue-600 flex items-center justify-center rounded-md ">
-                  bed
-                </Box>
-                <Text className="font-extrabold text-xl" fw={"600"}>
-                  Company name
-                </Text>
-              </Box>
-              <Box className="text-2xl">
-                <FaRegArrowAltCircleLeft />
-              </Box>
-            </Box> */}
+           
             <header>
               <div className="flex items-center justify-center gap-1">
                 <Logo />
@@ -166,74 +159,7 @@ const UserDashLayout = () => {
                 </NavLink>
               </li>
             </ul>
-            {/* <Box className="w-full flex  flex-col gap-1">
-              <Accordion classNames={classes} color="white">
-                {Menus.map((menu) => {
-                  return (
-                    <Accordion.Item
-                      value={menu.controlTxt}
-                      key={menu.controlTxt}
-                    >
-                      <Accordion.Control
-                        icon={menu.controlIcon}
-                        className="accordCtrl"
-                      >
-                        {menu.controlTxt}
-                      </Accordion.Control>
-                      <Accordion.Panel>
-                        {menu.panel.map((item) => {
-                          return (
-                            <Box className="w-full flex justify-between p-2 rounded-lg ">
-                              <Accordion
-                                classNames={classes}
-                                className="w-full"
-                              >
-                                <Accordion.Item
-                                  value={item.text}
-                                  key={item.text}
-                                >
-                                  <Accordion.Control
-                                    color="white"
-                                    className="accordCtrl"
-                                  >
-                                    <Box className="flex items-center font-bold gap-3">
-                                      {item.icon}
-                                      <Text
-                                        className="font-bold text-lg"
-                                        fw={600}
-                                      >
-                                        {item.text}
-                                      </Text>
-                                    </Box>
-                                  </Accordion.Control>
-                                  <Accordion.Panel>
-                                    {item.list.map((sub) => {
-                                      return (
-                                        <Link to={sub.link}>
-                                          <Box className="flex items-center p-3 font-bold gap-3">
-                                            {sub.subSecIcon}
-                                            <Text
-                                              className="font-bold text-lg"
-                                              fw={600}
-                                            >
-                                              {sub.subText}
-                                            </Text>
-                                          </Box>
-                                        </Link>
-                                      );
-                                    })}
-                                  </Accordion.Panel>
-                                </Accordion.Item>
-                              </Accordion>
-                            </Box>
-                          );
-                        })}
-                      </Accordion.Panel>
-                    </Accordion.Item>
-                  );
-                })}
-              </Accordion>
-            </Box> */}
+            
           </Box>
         </Box>
         <Box
@@ -278,7 +204,7 @@ const UserDashLayout = () => {
                     </Indicator>
                   </button>
                   <Menu shadow="lg" position="bottom-end" width={200}>
-                    <Menu.Target>
+                    <Menu.Target >
                       <Avatar
                         src={profile}
                         name="Gerald"
@@ -294,7 +220,7 @@ const UserDashLayout = () => {
                         <Flex>
                           <Box>
                             <Text className=" profilename" fw={500} fs={"12px"}>
-                              John Doe
+                              {user?.name}
                             </Text>
                           </Box>
                         </Flex>
@@ -308,6 +234,7 @@ const UserDashLayout = () => {
                         className="flex items-center"
                         color="red"
                         leftSection={<MdOutlineLogout />}
+                        onClick={open}
                       >
                         Logout
                       </Menu.Item>
@@ -321,6 +248,7 @@ const UserDashLayout = () => {
             </Box>
           </Box>
         </Box>
+        <LogoutModal opened={opened} close={close} />
       </Box>
     </>
   );

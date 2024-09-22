@@ -53,9 +53,7 @@ const Root = () => {
       loaderProps={{ type: "bars", color: "green" }}
     />
   ) : (
-    // <div className="h-screen w-full flex justify-center items-center">
-    //     <video src={loadingVideo} autoPlay muted style={{width: "300px", height: "300px"}} loop></video>
-    // </div>
+
     <div className="overflow-x-hidden">
       <Outlet />
     </div>

@@ -14,7 +14,7 @@ const Home = () => {
         <>
             <Navbar />
             {/* className='landing-page-container'  */}
-            <div className='flex flex-col gap-6 lg:flex-row justify-around px-10 py-7 mx-20'>
+            <div className='flex flex-col gap-6 lg:flex-row justify-around px-10 py-7'>
                 {/* className='landing-left' */}
                 <div className='flex flex-col items-center lg:justify-center lg:items-start gap-2 text-center lg:text-left lg:w-[60%]'>
                     <h1 className='text-4xl lg:text-6xl font-semibold max-w-[700px] text-primary-color'>Plan your next Travel with ease </h1>
@@ -26,7 +26,7 @@ const Home = () => {
                 </div>
             </div>
             {/* Trips */}
-            <div className='flex flex-col gap-6 lg:flex-row justify-around px-10 py-7 mx-20 '>
+            <div className='flex flex-col gap-6 lg:flex-row justify-around px-10 py-7'>
                 <div className='flex flex-col items-center lg:justify-center lg:items-start gap-2 text-center lg:text-left lg:w-[60%]'>
                     <p className='text-4xl lg:text-4xl font-semibold max-w-[700px] text-primary-color'>Manage Trips and Itineraries</p>
                     <p className='text-[#6e706e] lg:text-xl max-w-xl'>Plan and organize your destinations, activities, and accommodations with ease.</p>
@@ -36,7 +36,7 @@ const Home = () => {
                 </div>
             </div>
             {/* Expenses */}
-            <div className='flex flex-col gap-6 lg:flex-row justify-around px-10 py-7 mx-20 '>
+            <div className='flex flex-col gap-6 lg:flex-row justify-around px-10 py-7'>
                 <div className='flex flex-col items-center lg:justify-center lg:items-start gap-2 text-center lg:text-left lg:w-[60%]'>
                     <p className='text-4xl lg:text-4xl font-semibold max-w-[700px] text-primary-color'>Track Expenses in Real Time</p>
                     <p className='text-[#6e706e] lg:text-xl max-w-xl'>Stay on top of your budget with real-time expense logging and alerts.</p>
@@ -46,7 +46,7 @@ const Home = () => {
                 </div>
             </div>
             {/* Currency */}
-            <div className='flex flex-col gap-6 md:gap-10 lg:flex-row justify-around px-10 py-7 mx-20 '>
+            <div className='flex flex-col gap-6 md:gap-10 lg:flex-row justify-around px-10 py-7  '>
                 <div className='lg:order-first md:-order-first'>
                     <img src={img4} className='rounded-lg lg:h-[500px] lg:w-[500px] w-full' alt="Nice View" />
                 </div>
@@ -56,7 +56,7 @@ const Home = () => {
                 </div>
             </div>
             {/* Reminders */}
-            <div className='flex flex-col gap-6  lg:flex-row justify-around px-10 py-7 mx-20 '>
+            <div className='flex flex-col gap-6  lg:flex-row justify-around px-10 py-7'>
                 <div className='flex flex-col items-center lg:justify-center lg:items-start gap-2 text-center lg:text-left lg:w-[60%]'>
                     <p className='text-4xl lg:text-4xl font-semibold max-w-[700px] lg:w-[700px] text-primary-color'>Reminders and Notifications</p>
                     <p className='text-[#6e706e] lg:text-xl max-w-xl'>Never miss a beat with daily reminders to log expenses and itinerary updates.</p>
@@ -70,7 +70,7 @@ const Home = () => {
             </div>
 
             <div className='flex flex-col gap-10 justify-center items-center bg-primary-color text-white h-[300px] p-10'>
-                <p className='text-[36px]'>Sign Up and start planning your trip!</p>
+                <p className='text-[36px] text-center'>Sign Up and start planning your trip!</p>
                 <button className='bg-white text-primary-color text-[20px] w-[140px] h-[40px] rounded-full'><Link to={"/signup"}> Sign Up</Link></button>
             </div>
             <Footer/>

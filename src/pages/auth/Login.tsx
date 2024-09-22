@@ -110,7 +110,7 @@ const Login = () => {
             <input
               type="email"
               id="email"
-              className="border border-[#cfd4d0] rounded-lg bg-transparent focus:border-none focus:ring-2 focus:ring-[#1a6d2e] px-3 py-2 flex items-center w-full"
+              className="border border-[#cfd4d0] placeholder:text-[#b2b7b3] focus:outline-primary-color outline-none rounded-lg py-2 px-4 placeholder:text-[15px]"
               {...register("email")}
               placeholder="Enter your email"
             />

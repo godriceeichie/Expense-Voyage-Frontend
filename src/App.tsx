@@ -10,7 +10,7 @@ import { Gallery, Home,
   Signup,
 } from "./pages";
 import DashHome from "./pages/dashboard/DashHome";
-import { UserDashLayout } from "./layout/index";
+import { Root, UserDashLayout } from "./layout/index";
 import { Toaster } from "react-hot-toast";
 import AuthMiddleware from "./middleware/AuthMiddleware";
 import Landingpage from './pages/Home'
@@ -29,7 +29,16 @@ function App() {
     },
     {
       path: '/',
-      element: <Home />
+      // <Route element={<Root />} path="/">
+      // <Route index element={<Home />} />
+    // </Route>
+      element: <Root />,
+      children: [
+        {
+          index: true,
+          element: <Home />
+        }
+      ]
     },
     {
       path: '/explore',
